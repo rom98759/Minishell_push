@@ -15,15 +15,17 @@
 int	ft_env(char **env)
 {
 	int		i;
-	char	*str;
+	int		j;
 
 	if (!env)
 		return (1);
 	i = 0;
 	while (env[i])
 	{
-		str = ft_strchr(env[i], '=');
-		if (str != NULL && str + 1 != NULL)
+		j = 0;
+		while (env[i][j] && env[i][j] != '=')
+			j++;
+		if (env[i][j] == '=' && env[i][j + 1])
 			printf("%s\n", env[i]);
 		i++;
 	}
