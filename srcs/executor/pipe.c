@@ -57,6 +57,8 @@ static int	has_stdout_redirection(t_token *tokens, int i)
  */
 static void	child_process(t_cmd *cmd, size_t i, int input_fd, int fd[2])
 {
+	int has_redir;
+
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	close_std(cmd);
@@ -65,14 +67,13 @@ static void	child_process(t_cmd *cmd, size_t i, int input_fd, int fd[2])
 		dup2(input_fd, STDIN_FILENO);
 		close(input_fd);
 	}
-	if (i < cmd->nb_cmd && !has_stdout_redirection(cmd->token_list, i))
-	{
+	has_redir = has_stdout_redirection(cmd->token_list, i);
+	if (i < cmd->nb_cmd && !has_redir)
 		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-	}
-	else if (i == cmd->nb_cmd)
-		close(fd[0]);
+	close(fd[1]);
+	if (has_redir && fd[0] != STDIN_FILENO)
+		dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
 	run_command(cmd, i);
 	exit(0);
 }

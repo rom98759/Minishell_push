@@ -289,11 +289,4 @@ int			save_std(t_cmd *cmd);
 int			restore_std(t_cmd *cmd);
 void		close_std(t_cmd *cmd);
 
-/*
-**                                DEBUG
-*/
-char		*get_type(int type);
-char		*get_color(int type);
-void		print_tokens(t_token *tokens);
-
 #endif
