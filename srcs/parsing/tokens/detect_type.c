@@ -20,18 +20,14 @@
  */
 int	detect_redirections(char *str)
 {
+	if (ft_strcmp(str, ">>") == 0)
+		return (APPEND);
 	if (ft_strcmp(str, ">") == 0)
-	{
-		if (ft_strcmp(str, ">>") == 0)
-			return (APPEND);
 		return (TRUNC);
-	}
+	if (ft_strcmp(str, "<<") == 0)
+		return (HEREDOC);
 	if (ft_strcmp(str, "<") == 0)
-	{
-		if (ft_strcmp(str, "<<") == 0)
-			return (HEREDOC);
 		return (INPUT);
-	}
 	return (-1);
 }
 
@@ -56,6 +52,8 @@ int	get_token_type(char **input, int i)
 		return (HEREDOC);
 	if (i > 0 && detect_redirections(input[i - 1]) != -1)
 	{
+		if (detect_redirections(input[i - 1]) == HEREDOC)
+			return (HEREDOC_FILE);
 		if (is_valid_filename(input[i]))
 			return (FILENAME);
 	}

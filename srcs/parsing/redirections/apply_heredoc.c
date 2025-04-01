@@ -61,7 +61,7 @@ static int	process_heredoc_input(int fd, t_heredoc *heredoc, t_cmd *cmd)
 		}
 		if (is_sigint_received_heredoc(line))
 			return (1);
-		if (ft_strcmp(line, heredoc->delimiter) == 0)
+		if (is_eof_heredoc(line, heredoc))
 		{
 			free(line);
 			break ;

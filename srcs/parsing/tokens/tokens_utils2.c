@@ -66,7 +66,7 @@ char	*get_new_str_token(char *s, int type)
 {
 	char	*new_str;
 
-	if (type == HEREDOC)
+	if (type == HEREDOC_FILE)
 	{
 		new_str = ft_strdup(s);
 		if (!new_str)

@@ -201,6 +201,7 @@ long long	ft_safe_atoll(const char *str, int *valid);
 int			handle_heredocs(t_cmd *cmd);
 int			create_heredoc(t_cmd *cmd);
 int			apply_heredoc(t_cmd *cmd);
+int			is_eof_heredoc(char *line, t_heredoc *heredoc);
 char		*generate_file(void);
 char		*expand_heredoc(char *line, t_heredoc *heredoc, t_cmd *cmd);
 void		add_heredoc_to_list(t_heredoc **head, t_heredoc *new_heredoc);

@@ -68,6 +68,7 @@ SRCS_REDIRECTIONS := \
 	srcs/parsing/redirections/change_heredoc.c \
 	srcs/parsing/redirections/create_heredoc.c \
 	srcs/parsing/redirections/apply_heredoc.c \
+	srcs/parsing/redirections/apply_heredoc_utils.c \
 	srcs/parsing/redirections/heredocs_expand.c
 
 # Expand sources (subset of Parsing)
