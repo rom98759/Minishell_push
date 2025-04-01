@@ -36,9 +36,6 @@
 /*                               DEFINES & MACROS                             */
 /* ************************************************************************** */
 
-# define ALPHA 	"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define NUM 	"0123456789"
-# define ALPHA_NUM	ALPHA NUM
 # define FOLDER_HEREDOC "/tmp/heredoc_"
 
 /* ************************************************************************** */
@@ -196,7 +193,6 @@ size_t		ft_itoa_len(int n);
 char		*remove_quotes(char *str);
 char		*remove_all_quote(char *s);
 long long	ft_safe_atoll(const char *str, int *valid);
-
 
 /*
 **                                HEREDOC

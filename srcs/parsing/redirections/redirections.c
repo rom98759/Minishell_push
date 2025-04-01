@@ -66,7 +66,6 @@ int	apply_redirections(t_cmd *cmd)
  */
 int	handle_redirections(t_cmd *cmd, int index)
 {
-	// cmd->token_list = swap_token(cmd); /// LEAK CAR NE LIBERE PAS LE TOKEN_LIST
 	create_redir(cmd, index);
 	if (cmd->redir_list)
 		if (apply_redirections(cmd) == -1)
