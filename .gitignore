@@ -1,0 +1,8 @@
+obj/
+*.o
+.vscode/
+*.out
+minishell
+libft.a
+.minishell_history
+valgrind.supp
