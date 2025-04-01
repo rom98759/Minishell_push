@@ -57,7 +57,7 @@ static int	has_stdout_redirection(t_token *tokens, int i)
  */
 static void	child_process(t_cmd *cmd, size_t i, int input_fd, int fd[2])
 {
-	int has_redir;
+	int	has_redir;
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
