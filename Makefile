@@ -63,13 +63,12 @@ SRCS_TOKENS := \
 SRCS_REDIRECTIONS := \
 	srcs/parsing/redirections/redirections.c \
 	srcs/parsing/redirections/create_redirections.c \
-	srcs/parsing/redirections/swap_tokens.c \
-	srcs/parsing/redirections/swap_tokens_utils.c \
 	srcs/parsing/redirections/heredocs_utils.c \
 	srcs/parsing/redirections/handle_heredoc.c \
 	srcs/parsing/redirections/change_heredoc.c \
 	srcs/parsing/redirections/create_heredoc.c \
-	srcs/parsing/redirections/apply_heredoc.c
+	srcs/parsing/redirections/apply_heredoc.c \
+	srcs/parsing/redirections/heredocs_expand.c
 
 # Expand sources (subset of Parsing)
 SRCS_EXPAND := \

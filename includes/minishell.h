@@ -119,6 +119,7 @@ t_token		*tokenize(char **input);
 int			tokenize_and_validate(char **input, t_cmd *cmd);
 void		detect_and_add_redirections(t_token *tokens, t_cmd *cmd);
 size_t		get_command_count(t_token *tokens);
+char		*get_new_str_token(char *s, int type);
 char		**token_to_tab_sin_redir(t_token *tokens);
 
 /*
@@ -201,6 +202,7 @@ int			handle_heredocs(t_cmd *cmd);
 int			create_heredoc(t_cmd *cmd);
 int			apply_heredoc(t_cmd *cmd);
 char		*generate_file(void);
+char		*expand_heredoc(char *line, t_heredoc *heredoc, t_cmd *cmd);
 void		add_heredoc_to_list(t_heredoc **head, t_heredoc *new_heredoc);
 void		delete_heredoc(t_heredoc *heredoc);
 void		change_heredoc_to_input(t_cmd *cmd);

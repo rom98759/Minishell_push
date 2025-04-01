@@ -61,3 +61,20 @@ size_t	get_command_count(t_token *tokens)
 	}
 	return (count);
 }
+
+char	*get_new_str_token(char *s, int type)
+{
+	char	*new_str;
+
+	if (type == HEREDOC)
+	{
+		new_str = ft_strdup(s);
+		if (!new_str)
+			return (NULL);
+		return (new_str);
+	}
+	new_str = remove_all_quote(s);
+	if (!new_str)
+		return (NULL);
+	return (new_str);
+}

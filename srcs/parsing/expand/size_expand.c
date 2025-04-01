@@ -6,13 +6,13 @@
 /*   By: rcaillie <rcaillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:39:35 by rcaillie          #+#    #+#             */
-/*   Updated: 2025/03/24 11:39:30 by rcaillie         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:21:48 by rcaillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	get_var_size(const char *str, t_expansion_data *exp_data, size_t *i)
+size_t	get_var_size(const char *str, t_expand *exp_data, size_t *i)
 {
 	char	*var_name;
 	char	*value;
@@ -31,7 +31,7 @@ size_t	get_var_size(const char *str, t_expansion_data *exp_data, size_t *i)
 	return (size);
 }
 
-size_t	count_new_size(const char *str, t_expansion_data *exp_data)
+size_t	count_new_size(const char *str, t_expand *exp_data)
 {
 	size_t	i;
 	size_t	size;

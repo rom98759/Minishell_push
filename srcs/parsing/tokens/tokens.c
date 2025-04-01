@@ -23,7 +23,7 @@ static t_token	*create_and_add_token(char *input, int type, t_token *tokens)
 	char	*tmp;
 	char	*str;
 
-	tmp = remove_all_quote(input);
+	tmp = get_new_str_token(input, type);
 	if (!tmp)
 	{
 		ft_free_token_list(tokens);

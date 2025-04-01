@@ -15,12 +15,24 @@
 /**
  * @brief Écrit une ligne dans le fichier
  */
-static int	write_line(int fd, char *line)
+static int	write_line(int fd, char *line, t_cmd *cmd, t_heredoc *heredoc)
 {
-	if (write(fd, line, ft_strlen(line)) == -1)
+	char	*expanded_line;
+
+	expanded_line = expand_heredoc(line, heredoc, cmd);
+	if (!expanded_line)
 		return (-1);
+	if (write(fd, expanded_line, ft_strlen(expanded_line)) == -1)
+	{
+		free(expanded_line);
+		return (-1);
+	}
 	if (write(fd, "\n", 1) == -1)
+	{
+		free(expanded_line);
 		return (-1);
+	}
+	free(expanded_line);
 	return (0);
 }
 
@@ -35,7 +47,7 @@ static int	is_sigint_received_heredoc(char *line)
 	return (0);
 }
 
-static int	process_heredoc_input(int fd, t_heredoc *heredoc)
+static int	process_heredoc_input(int fd, t_heredoc *heredoc, t_cmd *cmd)
 {
 	char	*line;
 
@@ -54,7 +66,7 @@ static int	process_heredoc_input(int fd, t_heredoc *heredoc)
 			free(line);
 			break ;
 		}
-		if (write_line(fd, line) == -1)
+		if (write_line(fd, line, cmd, heredoc) == -1)
 		{
 			free(line);
 			return (-1);
@@ -80,7 +92,7 @@ static int	heredoc(t_heredoc *heredoc, t_cmd *cmd)
 		perror("minishell: open");
 		return (-1);
 	}
-	ret = process_heredoc_input(fd, heredoc);
+	ret = process_heredoc_input(fd, heredoc, cmd);
 	close(fd);
 	if (ret == -1)
 	{

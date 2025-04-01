@@ -6,7 +6,7 @@
 /*   By: rcaillie <rcaillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:32:00 by rcaillie          #+#    #+#             */
-/*   Updated: 2025/03/25 11:11:50 by rcaillie         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:21:48 by rcaillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*clean_whitespace(const char *str)
  * @param exp_data The expansion data.
  * @return The cleaned variable value.
  */
-char	*parse_var_value(char *var_name, t_expansion_data *exp_data)
+char	*parse_var_value(char *var_name, t_expand *exp_data)
 {
 	char	*value;
 	char	*cleaned_value;

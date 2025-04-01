@@ -32,22 +32,23 @@ typedef struct s_expansion_data
 	char		*output_str;
 	size_t		size;
 	int			quote;
-}				t_expansion_data;
+}				t_expand;
 
 /*
 ** Prototypes de fonctions d'expansion.
 */
-char	*clean_whitespace(const char *str);
-char	*parse_var_value(char *var_name, t_expansion_data *exp_data);
-int		handle_quotes(char c, int quote);
-size_t	get_var_size(const char *str, t_expansion_data *exp_data, size_t *i);
-size_t	count_new_size(const char *str, t_expansion_data *exp_data);
-void	expand_exit_status(t_expansion_data *exp_data, size_t *k, size_t *i);
-size_t	expand_env_variable(const char *str, size_t *i,
-			t_expansion_data *exp_data, size_t *k);
-char	*expand_single_char(const char *str, t_expansion_data *exp_data);
-char	**expand_var(char **str, char **env, int last_exit_status);
-char	*get_var_name(const char *str, size_t *i);
-char	**remove_empty_strings(char **str);
+char		*clean_whitespace(const char *str);
+char		*parse_var_value(char *var_name, t_expand *exp_data);
+int			handle_quotes(char c, int quote);
+size_t		get_var_size(const char *str, t_expand *exp_data, size_t *i);
+size_t		count_new_size(const char *str, t_expand *exp_data);
+void		expand_exit_status(t_expand *exp_data, size_t *k, size_t *i);
+size_t		expand_env_variable(const char *str, size_t *i,
+				t_expand *exp_data, size_t *k);
+char		*expand_single_char(const char *str, t_expand *exp_data);
+char		**expand_var(char **str, char **env, int last_exit_status);
+char		*get_var_name(const char *str, size_t *i);
+char		**remove_empty_strings(char **str);
+t_expand	init_exp_data(char **env, int last_exit_status);
 
 #endif

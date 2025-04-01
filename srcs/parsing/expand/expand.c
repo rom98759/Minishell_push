@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*expand_single_char(const char *str, t_expansion_data *exp_data)
+char	*expand_single_char(const char *str, t_expand *exp_data)
 {
 	size_t	i;
 	size_t	k;
@@ -39,9 +39,9 @@ char	*expand_single_char(const char *str, t_expansion_data *exp_data)
 	return (exp_data->output_str);
 }
 
-t_expansion_data	init_exp_data(char **env, int last_exit_status)
+t_expand	init_exp_data(char **env, int last_exit_status)
 {
-	t_expansion_data	exp_data;
+	t_expand	exp_data;
 
 	exp_data.env_data = (t_env_data *)ft_calloc(1, sizeof(t_env_data));
 	if (!exp_data.env_data)
@@ -54,9 +54,9 @@ t_expansion_data	init_exp_data(char **env, int last_exit_status)
 
 char	**expand_var(char **str, char **env, int last_exit_status)
 {
-	size_t				i;
-	char				**new_str;
-	t_expansion_data	exp_data;
+	size_t		i;
+	char		**new_str;
+	t_expand	exp_data;
 
 	exp_data = init_exp_data(env, last_exit_status);
 	i = ft_tablen(str);

@@ -6,14 +6,14 @@
 /*   By: rcaillie <rcaillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 11:13:44 by rcaillie          #+#    #+#             */
-/*   Updated: 2025/03/24 11:51:05 by rcaillie         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:21:48 by rcaillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 size_t	expand_env_variable(const char *str, size_t *i,
-	t_expansion_data *exp_data, size_t *k)
+	t_expand *exp_data, size_t *k)
 {
 	char	*var_name;
 	char	*value;
@@ -40,7 +40,7 @@ size_t	expand_env_variable(const char *str, size_t *i,
 	return (0);
 }
 
-void	expand_exit_status(t_expansion_data *exp_data, size_t *k, size_t *i)
+void	expand_exit_status(t_expand *exp_data, size_t *k, size_t *i)
 {
 	char	*value;
 
