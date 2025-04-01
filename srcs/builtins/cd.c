@@ -38,7 +38,16 @@ static int	cd_path(char *path, char *pwd)
 	{
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		if (errno == EACCES)
+			ft_putstr_fd(": Permission denied\n", 2);
+		else if (errno == ENOENT)
+			ft_putstr_fd(": No such file or directory\n", 2);
+		else
+		{
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+		}
 		free(pwd);
 		return (-1);
 	}
