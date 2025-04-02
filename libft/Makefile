@@ -59,7 +59,7 @@ endef
 # =============================================================================
 
 all: $(NAME)
-	@echo "\n🎉 $(NAME) built successfully!"
+	@echo "\n🎉 $(NAME) built successfully!\n"
 
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
