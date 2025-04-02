@@ -6,7 +6,7 @@
 /*   By: rcaillie <rcaillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:15:49 by rcaillie          #+#    #+#             */
-/*   Updated: 2025/03/20 10:19:41 by rcaillie         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:00:20 by rcaillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	find_env_var_index(char *name, char **env)
 	while (i < len)
 	{
 		if (ft_strncmp(env[i], name, ft_strlen(name)) == 0
-			&& env[i][ft_strlen(name)] == '=')
+			&& (env[i][ft_strlen(name)] == '='
+			|| env[i][ft_strlen(name)] == '\0'))
 			return (i);
 		i++;
 	}

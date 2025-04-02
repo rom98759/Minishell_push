@@ -33,11 +33,8 @@ static char	**ft_unset_env(char *name, char ***env)
 
 static int	unset_single_var(t_token *token, char ***env)
 {
-	if (my_getenv(token->str, *env))
-	{
-		if (!ft_unset_env(token->str, env))
-			return (-1);
-	}
+	if (!ft_unset_env(token->str, env))
+		return (-1);
 	return (0);
 }
 
