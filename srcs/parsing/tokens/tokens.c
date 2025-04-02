@@ -92,6 +92,8 @@ static int	tokenize_and_validate_impl(t_token **tokens, t_cmd *cmd)
 	detect_and_add_redirections(*tokens, cmd);
 	if (validate_syntax(*tokens, cmd) != 0)
 	{
+		ft_free_redir_list(cmd->redir_list);
+		cmd->redir_list = NULL;
 		ft_free_token_list(*tokens);
 		return (-1);
 	}

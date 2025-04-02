@@ -129,7 +129,7 @@ all: libft $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS) -lft
-	@echo "\n\033[0;35m😈 MINIHELL 😈 : \033[1;32mOK\033[0m"
+	@echo "\n\033[0;35m\n😈 MINIHELL 😈 : \033[1;32mOK\033[0m"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
