@@ -56,7 +56,7 @@ static int	process_heredoc_input(int fd, t_heredoc *heredoc, t_cmd *cmd)
 		line = readline("> ");
 		if (!line)
 		{
-			printf("HEREDOC: unexpected end\n");
+			printf("HEREDOC: unexpected end (want`%s')\n", heredoc->delimiter);
 			break ;
 		}
 		if (is_sigint_received_heredoc(line))
