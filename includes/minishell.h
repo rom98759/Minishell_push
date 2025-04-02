@@ -153,12 +153,6 @@ int			is_op_split(char *s);
 void		skip_whitespace(char *cmd, int *i);
 void		handle_quote(char *cmd, int *i, char quote);
 char		*dup_word(char *str, int start, int end);
-int			check_cmd(t_token **new_line, t_token **cur, int *flag,
-				t_token **p);
-int			check_doc(t_token **cur, t_token **p, t_token *start);
-int			check_arg(t_token **cur, t_token *start, t_token **p);
-int			check_trunc(t_token **cur, t_token *start, t_token **p);
-int			check_pipe(t_token **cur, t_token **p, t_token **start);
 
 /*
 **                          TOKENS UTILS
@@ -166,6 +160,10 @@ int			check_pipe(t_token **cur, t_token **p, t_token **start);
 t_token		*create_token(char *str, int type);
 void		add_token_to_list(t_token **head, t_token *new_token);
 t_token		*swap_token(t_cmd *cmd);
+void		update_ids(t_token *head);
+int			add_pipe(t_token **new_line, t_token **cur, int *flag);
+int			add_cmd(t_token **new_line, t_token **cur, int *flag);
+int			add_arg(t_token **new_line, t_token **cur, int *flag);
 
 /*
 **                             EXIT & ERROR

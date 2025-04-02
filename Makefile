@@ -70,7 +70,8 @@ SRCS_REDIRECTIONS := \
 	srcs/parsing/redirections/apply_heredoc.c \
 	srcs/parsing/redirections/apply_heredoc_utils.c \
 	srcs/parsing/redirections/heredocs_expand.c \
-	srcs/parsing/redirections/swap_tokens.c
+	srcs/parsing/redirections/swap_tokens.c \
+	srcs/parsing/redirections/swap_tokens_utils.c
 
 # Expand sources (subset of Parsing)
 SRCS_EXPAND := \
@@ -102,17 +103,37 @@ OBJ := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 LIBFT_A := $(LIBFT_DIR)/libft.a
 
 # =============================================================================
+#	📊 PROGRESS BAR CONFIG 📊
+# =============================================================================
+
+BAR_LENGTH := 50
+TOTAL_FILES := $(words $(SRCS))
+COMPILED_FILES := 0
+
+define progress_bar
+	$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
+	$(eval PROGRESS_PERCENT=$(shell echo $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))))
+	$(eval FILLED_BAR_LENGTH=$(shell echo $$(($(PROGRESS_PERCENT) * $(BAR_LENGTH) / 100))))
+	@printf "\rCompiling [\033[0;35m"
+	@for i in $(shell seq 1 $(FILLED_BAR_LENGTH)); do printf "#"; done
+	@for i in $(shell seq 1 $(shell echo $$(($(BAR_LENGTH) - $(FILLED_BAR_LENGTH))))); do printf " "; done
+	@printf "\033[0m] $(PROGRESS_PERCENT)%%"
+endef
+
+# =============================================================================
 # 🏗️ RULES 🏗️
 # =============================================================================
 
 all: libft $(NAME)
-	@echo "Compilation of $(NAME) : \033[1;32mOK\033[0m"
+	@echo "\n🎉 Compilation of $(NAME)!\n"
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS) -lft
+	@echo "\n\033[0;35m😈 MINIHELL 😈 : \033[1;32mOK\033[0m"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
+	$(call progress_bar)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # =============================================================================

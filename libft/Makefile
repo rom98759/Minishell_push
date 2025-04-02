@@ -96,7 +96,7 @@ gnl: $(OBJS_GNL)
 
 clean:
 	@rm -rf $(OBJ_PATH)
-	@echo "🧹 Object files cleaned!"
+	@echo "🧹 Object $(NAME) files cleaned!"
 
 fclean: clean
 	@rm -f $(NAME)
