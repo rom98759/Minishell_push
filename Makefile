@@ -69,7 +69,8 @@ SRCS_REDIRECTIONS := \
 	srcs/parsing/redirections/create_heredoc.c \
 	srcs/parsing/redirections/apply_heredoc.c \
 	srcs/parsing/redirections/apply_heredoc_utils.c \
-	srcs/parsing/redirections/heredocs_expand.c
+	srcs/parsing/redirections/heredocs_expand.c \
+	srcs/parsing/redirections/swap_tokens.c
 
 # Expand sources (subset of Parsing)
 SRCS_EXPAND := \

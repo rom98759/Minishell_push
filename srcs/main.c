@@ -21,6 +21,95 @@ static void	check_signal(t_cmd *cmd)
 	}
 }
 
+
+
+
+
+
+char	*get_type(int type)
+{
+	if (type == TRUNC)
+		return ("TRUNC");
+	if (type == APPEND)
+		return ("APPEND");
+	if (type == INPUT)
+		return ("INPUT");
+	if (type == HEREDOC)
+		return ("HEREDOC");
+	if (type == PIPE)
+		return ("PIPE");
+	if (type == COMMAND)
+		return ("COMMAND");
+	if (type == ARGUMENT)
+		return ("ARGUMENT");
+	if (type == FILENAME)
+		return ("FILENAME");
+	if (type == HEREDOC_FILE)
+		return ("HEREDOC_FILE");
+	return ("UNKNOWN");
+}
+
+char	*get_color(int type)
+{
+	if (type == TRUNC)
+		return ("\033[0;31m");
+	if (type == APPEND)
+		return ("\033[0;32m");
+	if (type == INPUT)
+		return ("\033[0;33m");
+	if (type == HEREDOC)
+		return ("\033[0;34m");
+	if (type == PIPE)
+		return ("\033[0;35m");
+	if (type == COMMAND)
+		return ("\033[0;36m");
+	if (type == ARGUMENT)
+		return ("\033[0;37m");
+	if (type == FILENAME)
+		return ("\033[1;33m");
+	if (type == HEREDOC_FILE)
+		return ("\033[1;34m");
+	return ("\033[0m");
+}
+
+void	print_tokens(t_token *tokens)
+{
+	t_token	*current;
+	int		i;
+
+	i = 0;
+	current = tokens;
+	while (current)
+	{
+		printf("%sToken: %s (type: %s) id: %d Current Adresse: %p\033[0m\n",
+			get_color(current->type),
+			current->str,
+			get_type(current->type),
+			current->id,
+			current);
+		current = current->next;
+	}
+	while (i < 50)
+	{
+		printf("-");
+		i++;
+	}
+	printf("\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * @brief Process input check line
  * @param cmd Command structure
@@ -47,6 +136,19 @@ static int	process_line(t_cmd *cmd, char *line)
 		ft_free_token_list(cmd->token_list);
 		return (0);
 	}
+
+	printf("token_list \n");
+	print_tokens(cmd->token_list);
+
+	cmd->token_list = swap_token(cmd);
+
+
+	printf("token_list NEW \n");
+	print_tokens(cmd->token_list);
+	ft_free_token_list(cmd->token_list);
+	cmd->token_list = NULL;
+	return (0);
+
 	cmd->nb_cmd = get_command_count(cmd->token_list);
 	return (1);
 }
@@ -104,7 +206,7 @@ void	ft_exec(char **env)
 			break ;
 		check_signal(cmd);
 		if (!process_line(cmd, line))
-			continue ;
+			break ; //////////////////////////////////// CONTINUE
 		if (!execute_parsed_command(cmd))
 			continue ;
 	}
