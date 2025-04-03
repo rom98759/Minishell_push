@@ -6,7 +6,7 @@
 /*   By: rcaillie <rcaillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:14:40 by rcaillie          #+#    #+#             */
-/*   Updated: 2025/03/31 21:11:15 by rcaillie         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:37:07 by rcaillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static int	execute_builtin_parent(t_cmd *cmd, int index)
 		free(name);
 		if (handle_redirections(cmd, index) == -1)
 		{
-			ft_free_cmd(cmd, 1);
-			exit(1);
+			cmd->exit_code = 1;
+			return (1);
 		}
 		command = get_command(cmd->token_list, index);
 		cmd->exit_code = ft_execute_builtins(command, cmd, 0);
