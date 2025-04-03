@@ -27,42 +27,15 @@ static int	add_file(t_token **new_line, t_token **tmp)
 	return (0);
 }
 
-static int	add_redir_in(t_token **new_line, t_token **cur, int *flag)
+static int	add_redir(t_token **new_line, t_token **cur, int *flag)
 {
 	t_token	*tmp;
 
 	tmp = *cur;
 	while (tmp && tmp->type != PIPE)
 	{
-		if ((tmp->type == INPUT || tmp->type == HEREDOC) && tmp->id != -1)
-		{
-			if (*flag == 0)
-			{
-				*new_line = create_token(ft_strdup(tmp->str), tmp->type);
-				if (!*new_line)
-					return (1);
-				*flag = 1;
-			}
-			else
-				add_token_to_list(new_line,
-					create_token(ft_strdup(tmp->str), tmp->type));
-			tmp->id = -1;
-			if (add_file(new_line, &tmp->next) == 1)
-				return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-static int	add_redi_out(t_token **new_line, t_token **cur, int *flag)
-{
-	t_token	*tmp;
-
-	tmp = *cur;
-	while (tmp && tmp->type != PIPE)
-	{
-		if ((tmp->type == TRUNC || tmp->type == APPEND) && tmp->id != -1)
+		if ((tmp->type == INPUT || tmp->type == HEREDOC || tmp->type == TRUNC
+				|| tmp->type == APPEND) && tmp->id != -1)
 		{
 			if (*flag == 0)
 			{
@@ -99,9 +72,7 @@ t_token	*swap_token(t_cmd *cmd)
 			return (NULL);
 		if (add_arg(&new_line, &cur, &flag) == 1)
 			return (NULL);
-		if (add_redir_in(&new_line, &cur, &flag) == 1)
-			return (NULL);
-		if (add_redi_out(&new_line, &cur, &flag) == 1)
+		if (add_redir(&new_line, &cur, &flag) == 1)
 			return (NULL);
 		while (cur && cur->id == -1)
 			cur = cur->next;
